@@ -18,7 +18,7 @@ export const useBooksQuery = () => {
       setBooks({ ...books, error: '', loading: true })
 
       const response = await axios.get(
-        `https://dream-books.onrender.com/api/v1/books?page=${books.pageNumber}`
+        `http://localhost:8000/api/v1/books?page=${books.pageNumber}`
       )
 
       let data: Book[] = []

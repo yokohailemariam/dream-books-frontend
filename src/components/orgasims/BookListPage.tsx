@@ -14,18 +14,41 @@ const BookListPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const onRefresh = async () => {
+    setBooks((prev) => {
+      return {
+        ...prev,
+        books: [],
+        pageNumber: 1
+      }
+    })
+  }
+
   return (
     <div className='flex flex-cols justify-center'>
       <InfiniteScroll
+        refreshFunction={onRefresh}
+        pullDownToRefresh
+        pullDownToRefreshThreshold={50}
+        pullDownToRefreshContent={<h3 className='text-center'>refresh</h3>}
+        releaseToRefreshContent={
+          <h3 className='text-center'>&#8593; Release to refresh</h3>
+        }
         dataLength={books.books.length}
         next={() => {
           getBooks()
           setBooks({ ...books, pageNumber: books.pageNumber + 1 })
         }}
-        loader={<p>Loading...</p>}
+        loader={
+          <p className='flex items-center justify-center min-h-screen'>
+            Loading...
+          </p>
+        }
         endMessage={<p>No more data to load.</p>}
         hasMore={books.hasMore}
       >
+        <p className='text-center py-4 font-[700] text-[18px]'>Books</p>
+
         <BookList />
       </InfiniteScroll>
     </div>

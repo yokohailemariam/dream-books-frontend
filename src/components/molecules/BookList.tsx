@@ -8,7 +8,7 @@ const BookList = () => {
   return (
     <div className='grid grid-cols-1 sm300:grid-cols-2 gap-1 '>
       {bookList.books.map((book) => (
-        <div key={book.id}>
+        <div key={book.id * Math.random()}>
           <img
             height={187}
             width={187}
